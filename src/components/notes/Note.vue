@@ -1,7 +1,7 @@
 <template>
   <div class="note">
     <h1>{{note.title}}</h1>
-    <p>{{note.content}}</p>
+    <pre>{{note.content}}</pre>
   </div>
 </template>
 <script>
@@ -21,9 +21,13 @@ export default {
 .note h1{
   font-size: 1.1em;
   margin-bottom: 6px;
+  word-wrap: break-word;
 }
-.note p {
+.note pre {
   font-size: 1.1em;
   margin-bottom: 10px;
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  font-family: inherit;
 }
 </style>

@@ -6,11 +6,11 @@
 </template>
 <script>
 import Notes from './components/notes/Index'
-import Create from './components/notes/Create'
+import CreateNoteForm from './components/notes/Create'
 export default {
   components: {
     Notes,
-    'create-note-form': Create
+    CreateNoteForm
   }
 }
 </script>
@@ -25,5 +25,6 @@ html{
 }
 body{
   background: #eee;
+  padding: 0 16px;
 }
 </style>

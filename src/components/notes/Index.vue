@@ -27,7 +27,7 @@ export default {
       gutter: 16,
       fitWidth: true
     })
-    let firebase = new Firebase('https://resplendent-heat-896.firebaseio.com/')
+    let firebase = new Firebase('https://gkeep-vueifire.firebaseio.com/')
     firebase.child('notes').on('child_added', (snapshot) => {
       let note = snapshot.val()
       this.notes.push(note)

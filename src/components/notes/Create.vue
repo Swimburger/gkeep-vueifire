@@ -8,7 +8,7 @@
 </template>
 <script>
 import Firebase from 'firebase'
-let firebase = new Firebase('https://resplendent-heat-896.firebaseio.com/')
+let firebase = new Firebase('https://gkeep-vueifire.firebaseio.com/')
 
 export default {
   data () {
