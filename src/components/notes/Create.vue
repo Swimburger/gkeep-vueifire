@@ -36,6 +36,7 @@ export default {
 form.create-note{
   position: relative;
   width: 480px;
+  max-width: 100%;
   margin: 0 auto 15px;
   background: #fff;
   padding: 15px;
