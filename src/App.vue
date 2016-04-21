@@ -26,8 +26,8 @@ html{
   font-family: sans-serif;
 }
 body{
+  background: #eee;
   min-height: 100%;
-  background: #333;
 }
 body > div{
   padding: 16px 16px 50px;
@@ -39,6 +39,7 @@ body > div{
   box-shadow: 0 2px 5px #111;
 }
 footer{
+  background: #333;
   color: #fff;
   text-align: center;
   padding: 12px 0 10px;
