@@ -27,25 +27,34 @@ html{
 }
 body{
   min-height: 100%;
-  background: #eee;
-  padding-bottom: 85px;
 }
 body > div{
-  padding: 0 16px;
+  padding: 16px 16px 50px;
+  min-height: 100%;
+  background: #eee;
+  position: relative;
+  margin-bottom: 50px;
+  z-index: 1;
+  box-shadow: 0 2px 5px #111;
 }
 footer{
   background: #333;
-  text-align: center;
   color: #fff;
+  text-align: center;
   padding: 12px 0 10px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  height: 50px;
   width: 100%;
 }
 footer a{
   color: #e03c3c;
 }
+footer .fa-heart{
+  margin: 0 10px 0 0;
+}
 footer iframe{
-  margin: 12px 0 0;
+  position: relative;
+  top: 4px;
 }
 </style>
