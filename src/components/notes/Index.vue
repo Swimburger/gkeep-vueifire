@@ -30,7 +30,7 @@ export default {
     let firebase = new Firebase('https://gkeep-vueifire.firebaseio.com/')
     firebase.child('notes').on('child_added', (snapshot) => {
       let note = snapshot.val()
-      this.notes.push(note)
+      this.notes.unshift(note)
       this.$nextTick(() => { // the new note hasn't been rendered yet, but in the nextTick, it will be rendered
         masonry.reloadItems()
         masonry.layout()
