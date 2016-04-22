@@ -19,10 +19,8 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        NoteRepository.creat({title: this.title, content: this.content}, (err) => {
-          if (err) {
-            throw err
-          }
+        NoteRepository.create({title: this.title, content: this.content}, (err) => {
+          if (err) throw err
           this.title = ''
           this.content = ''
         })

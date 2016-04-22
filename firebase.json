@@ -1,5 +1,5 @@
 {
-  "firebase": "gkeep-vueifire",
+  "firebase": "gkeep-vueifire2",
   "public": "dist",
   "ignore": [
     "firebase.json",

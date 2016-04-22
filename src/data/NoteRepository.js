@@ -50,6 +50,7 @@ function onRemoved (oldSnapshot) {
 function onChanged (snapshot) {
   let note = snapshot.val()
   let key = snapshot.key()
+  note.key = key
   let index = notes.findIndex((note) => {
     return note.key === key
   })

@@ -2,7 +2,7 @@
   <div class="note">
     <h1>{{note.title}}</h1>
     <pre>{{note.content}}</pre>
-    <button type="button" v-on:click="remove(note)">
+    <button type="button" v-on:click.stop="remove(note)">
       <i class="fa fa-trash-o" aria-hidden="true"></i>
     </button>
     <button type="button">
