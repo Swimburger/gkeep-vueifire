@@ -1,6 +1,6 @@
 <template>
   <div v-if="note" transition="modal" class="backdrop" v-on:click="note = null">
-    <form class="edit-note" v-on:submit.prevent="update(note)">
+    <form class="edit-note" v-on:submit.prevent="update(note)" v-on:click.stop="">
       <input name="title" v-model="note.title" placeholder="Title"/>
       <textarea name="content" v-model="note.content" placeholder="Text goes here..." rows="8">
       </textarea>
