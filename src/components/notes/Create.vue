@@ -7,8 +7,7 @@
   </form>
 </template>
 <script>
-import Firebase from 'firebase'
-let firebase = new Firebase('https://gkeep-vueifire.firebaseio.com/')
+import * as NoteRepository from '../../data/NoteRepository'
 
 export default {
   data () {
@@ -20,7 +19,7 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        firebase.child('notes').push({title: this.title, content: this.content}, (err) => {
+        NoteRepository.creat({title: this.title, content: this.content}, (err) => {
           if (err) {
             throw err
           }

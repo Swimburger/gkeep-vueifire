@@ -3,21 +3,27 @@
       <note
         v-for="note in notes"
         :note="note"
+        v-on:click="selectNote(note)"
         >
       </note>
   </div>
 </template>
 <script>
-import Firebase from 'firebase'
 import Masonry from 'masonry-layout'
 import Note from './Note'
+import * as NoteRepository from '../../data/NoteRepository'
 export default {
   components: {
     Note
   },
   data () {
     return {
-      notes: []
+      notes: NoteRepository.notes
+    }
+  },
+  methods: {
+    selectNote (note) {
+      this.$dispatch('note.selected', note)
     }
   },
   ready () {
@@ -27,10 +33,7 @@ export default {
       gutter: 16,
       fitWidth: true
     })
-    let firebase = new Firebase('https://gkeep-vueifire.firebaseio.com/')
-    firebase.child('notes').on('child_added', (snapshot) => {
-      let note = snapshot.val()
-      this.notes.unshift(note)
+    NoteRepository.events.on('*', () => {
       this.$nextTick(() => { // the new note hasn't been rendered yet, but in the nextTick, it will be rendered
         masonry.reloadItems()
         masonry.layout()
