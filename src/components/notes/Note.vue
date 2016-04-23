@@ -1,21 +1,30 @@
 <template>
-  <div class="note">
+  <div class="note" v-bind:class="[size]">
     <h1>{{note.title}}</h1>
     <pre>{{note.content}}</pre>
     <button type="button" v-on:click.stop="remove(note)">
       <i class="fa fa-trash-o" aria-hidden="true"></i>
     </button>
-    <button type="button">
+    <button class="edit" type="button">
       <i class="fa fa-pencil" aria-hidden="true"></i>
     </button>
   </div>
 </template>
 <script>
-import * as NoteRepository from '../../data/NoteRepository'
+import noteRepository from '../../data/NoteRepository'
 export default {
   props: ['note'],
+  computed: {
+    size () {
+      let length = this.note.content.length
+      if (length < 500) {
+        return 'small'
+      }
+      return 'medium'
+    }
+  },
   methods: {
-    remove: note => NoteRepository.remove(note)
+    remove: note => noteRepository.remove(note)
   }
 }
 </script>
@@ -28,6 +37,9 @@ export default {
   margin: 8px 0;
   width: 240px;
   transition: box-shadow .5s;
+}
+.note.medium{
+  width: 496px;
 }
 .note h1{
   font-size: 1.1em;
@@ -49,6 +61,9 @@ export default {
   cursor: pointer;
   transition: opacity .5s;
   margin: 0 4px 0 0;
+}
+.note button.edit{
+  float: right;
 }
 .note:hover, .note:focus{
   box-shadow: 0 2px 10px #999;

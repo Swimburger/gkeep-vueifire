@@ -7,7 +7,7 @@
   </form>
 </template>
 <script>
-import * as NoteRepository from '../../data/NoteRepository'
+import noteRepository from '../../data/NoteRepository'
 
 export default {
   data () {
@@ -19,7 +19,7 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        NoteRepository.create({title: this.title, content: this.content}, (err) => {
+        noteRepository.create({title: this.title, content: this.content}, (err) => {
           if (err) throw err
           this.title = ''
           this.content = ''

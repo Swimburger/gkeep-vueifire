@@ -12,18 +12,18 @@
   </div>
 </template>
 <script>
-import * as NoteRepository from '../../data/NoteRepository'
+import noteRepository from '../../data/NoteRepository'
 export default {
   props: ['note'],
   methods: {
     remove (note) {
-      NoteRepository.remove(note, (err) => {
+      noteRepository.remove(note, (err) => {
         if (err) throw err
         this.note = null
       })
     },
     update (note) {
-      NoteRepository.update(note, (err) => {
+      noteRepository.update(note, (err) => {
         if (err) throw err
         this.note = null
       })
