@@ -1,7 +1,9 @@
 # Google Keep Clone built with Vue and Firebase
 
-> Google Keep clone built with Vue and Firebase
+This project is a multi-part tutorial coming soon on Scotch.io on how to build a Google Keep clone built with Vue and Firebase.
 
+* Part 1: 7a2a5163b353f8b28ecf4c26842397ff8645d634
+* Part 2: WIP
 ## Build Setup
 
 ``` bash
@@ -13,15 +15,4 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](https://github.com/vuejs-templates/webpack#vue-webpack-boilerplate) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
