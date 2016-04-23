@@ -2,8 +2,9 @@
 
 This project is a multi-part tutorial coming soon on Scotch.io on how to build a Google Keep clone built with Vue and Firebase.
 
-* Part 1: 7a2a5163b353f8b28ecf4c26842397ff8645d634
+* [Part 1](https://github.com/SNiels/gkeep-vueifire/tree/Part_1)
 * Part 2: WIP
+
 ## Build Setup
 
 ``` bash
