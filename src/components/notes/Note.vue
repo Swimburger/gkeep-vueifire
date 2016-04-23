@@ -35,11 +35,12 @@ export default {
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   margin: 8px 0;
-  width: 240px;
+  width: 240px; /* collumn size */
   transition: box-shadow .5s;
+  cursor: default;
 }
 .note.medium{
-  width: 496px;
+  width: 496px; /* medium = (col * 2) + gutter | 496px = (240px * 2) + 16px */
 }
 .note h1{
   font-size: 1.1em;

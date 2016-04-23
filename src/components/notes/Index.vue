@@ -25,21 +25,21 @@ export default {
   },
   methods: {
     selectNote ({key, title, content}) {
-      this.$dispatch('note.selected', {key, title, content}) // pass in a copy to prevent edits on the note in the array
-    },
-    findNoteElementByKey (key) {
-      return this.$el.querySelector(`#note${key}`)
+      // notify listeners that user selected a note
+      // pass in a copy of the note to prevent edits on the original note in the array
+      this.$dispatch('note.selected', {key, title, content})
+    }
+  },
+  watch: {
+    'notes': { // watch the notes array for changes
+      handler () {
+        this.masonry.reloadItems()
+        this.masonry.layout()
+      },
+      deep: true // we also want to watch changed inside individual notes
     }
   },
   ready () {
-    this.$watch('notes', (newValue, oldValue) => {
-      console.log(newValue)
-      console.log(oldValue)
-      this.$nextTick(() => {
-        this.masonry.reloadItems()
-        this.masonry.layout()
-      })
-    })
     this.masonry = new Masonry(this.$els.notes, {
       itemSelector: '.note',
       columnWidth: 240,
@@ -47,27 +47,16 @@ export default {
       fitWidth: true
     })
     noteRepository.on('added', (note) => {
-      this.notes.unshift(note)
-      this.$nextTick(() => { // the new note hasn't been rendered yet, but in the nextTick, it will be rendered
-        this.masonry.prepended(this.findNoteElementByKey(note.key))
-        this.masonry.layout()
-      })
+      this.notes.unshift(note) // add the note to the beginning of the array
     })
     noteRepository.on('changed', ({key, title, content}) => {
       let note = noteRepository.find(this.notes, key) // get specific note from the notes in our VM by key
       note.title = title
       note.content = content
-      this.$nextTick(() => {
-        this.masonry.layout()
-      })
     })
     noteRepository.on('removed', ({key}) => {
       let note = noteRepository.find(this.notes, key) // get specific note from the notes in our VM by key
-      this.masonry.once('removeComplete', () => {
-        this.notes.$remove(note) // remove note from notes array after the animation of the removal is done!
-      })
-      this.masonry.remove(this.findNoteElementByKey(key)) // remove element from Masonry items
-      this.masonry.layout() // rerender without the element
+      this.notes.$remove(note) // remove note from notes array
     })
   }
 }

@@ -82,6 +82,8 @@ form.edit-note button{
 form.edit-note button:hover, form.edit-note button:focus{
   opacity: 1;
 }
+
+/* modal transition */
 .modal-transition{
   transition: opacity .3s ease;
   opacity: 1;

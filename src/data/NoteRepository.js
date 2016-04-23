@@ -29,13 +29,7 @@ class NoteRepository extends EventEmitter {
     note.key = key
     return note
   }
-  /**
-   * Finds the index of the note inside the array
-   *
-   * @param  {object[]} notes to search note in
-   * @param  {string} key to find notes index
-   * @return {number} return the index
-   */
+  // Finds the index of the note inside the array
   findIndex (notes, key) {
     return notes.findIndex(note => note.key === key)
   }
