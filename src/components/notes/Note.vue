@@ -2,7 +2,7 @@
   <div class="note" v-bind:class="[size]">
     <h1>{{note.title}}</h1>
     <pre>{{note.content}}</pre>
-    <button type="button" v-on:click.stop="remove(note)">
+    <button type="button" v-on:click.stop="remove">
       <i class="fa fa-trash-o" aria-hidden="true"></i>
     </button>
     <button class="edit" type="button">
@@ -24,7 +24,11 @@ export default {
     }
   },
   methods: {
-    remove: note => noteRepository.remove(note)
+    remove () {
+      noteRepository.remove(this.note, (err) => {
+        if (err) throw err // TODO: inform the user
+      })
+    }
   }
 }
 </script>

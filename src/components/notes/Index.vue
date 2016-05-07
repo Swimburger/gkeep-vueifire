@@ -4,7 +4,6 @@
       v-for="note in notes"
       :note="note"
       v-on:click="selectNote(note)"
-      id="note{{note.key}}"
       >
     </note>
   </div>
@@ -19,7 +18,6 @@ export default {
   },
   data () {
     return {
-      search: '',
       notes: []
     }
   },

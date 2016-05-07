@@ -1,5 +1,5 @@
 <template>
-  <form class="create-note" v-on:submit.prevent="createNote()">
+  <form class="create-note" v-on:submit.prevent="createNote">
     <input name="title" v-model="title" placeholder="Title"/>
     <textarea name="content" v-model="content" placeholder="Text goes here..." rows="3">
     </textarea>
@@ -19,11 +19,13 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        noteRepository.create({title: this.title, content: this.content}, (err) => {
-          if (err) throw err
+        let ref = noteRepository.create({title: this.title, content: this.content}, (err) => {
+          if (err) throw err // TODO: inform the user
           this.title = ''
           this.content = ''
+          console.log(ref.key())
         })
+        console.log(ref.key())
       }
     }
   }

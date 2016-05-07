@@ -1,10 +1,10 @@
 <template>
-  <div v-if="note" transition="modal" class="backdrop" v-on:click="note = null">
-    <form class="edit-note" v-on:submit.prevent="update(note)" v-on:click.stop="">
+  <div v-if="note" transition="modal" class="backdrop" v-on:click="dismissModal">
+    <form class="edit-note" v-on:submit.prevent="update" v-on:click.stop="">
       <input name="title" v-model="note.title" placeholder="Title"/>
       <textarea name="content" v-model="note.content" placeholder="Text goes here..." rows="8">
       </textarea>
-      <button type="button" v-on:click="remove(note)">
+      <button type="button" v-on:click="remove">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </button>
       <button type="submit">Done</button>
@@ -16,17 +16,20 @@ import noteRepository from '../../data/NoteRepository'
 export default {
   props: ['note'],
   methods: {
-    remove (note) {
-      noteRepository.remove(note, (err) => {
-        if (err) throw err
-        this.note = null
+    remove () {
+      noteRepository.remove(this.note, (err) => {
+        if (err) throw err // TODO: inform the user
+        this.dismissModal()
       })
     },
-    update (note) {
-      noteRepository.update(note, (err) => {
-        if (err) throw err
-        this.note = null
+    update () {
+      noteRepository.update(this.note, (err) => {
+        if (err) throw err // TODO: inform the user
+        this.dismissModal()
       })
+    },
+    dismissModal () {
+      this.note = null
     }
   }
 }
