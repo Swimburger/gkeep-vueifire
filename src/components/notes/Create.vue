@@ -19,13 +19,11 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        let ref = noteRepository.create({title: this.title, content: this.content}, (err) => {
+        noteRepository.create({title: this.title, content: this.content}, (err) => {
           if (err) throw err // TODO: inform the user
           this.title = ''
           this.content = ''
-          console.log(ref.key())
         })
-        console.log(ref.key())
       }
     }
   }
