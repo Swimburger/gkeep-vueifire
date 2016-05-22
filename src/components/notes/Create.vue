@@ -20,9 +20,10 @@ export default {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
         noteRepository.create({title: this.title, content: this.content}, (err) => {
-          if (err) throw err // TODO: inform the user
+          if (err) return this.$dispatch('alert', {type: 'error', message: 'Failed to create note'})
           this.title = ''
           this.content = ''
+          this.$dispatch('alert', {type: 'success', message: 'Note was successfully created'})
         })
       }
     }
@@ -34,7 +35,7 @@ form.create-note{
   position: relative;
   width: 480px;
   max-width: 100%;
-  margin: 0 auto 15px;
+  margin: 30px auto;
   background: #fff;
   padding: 15px;
   border-radius: 2px;

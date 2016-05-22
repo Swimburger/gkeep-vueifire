@@ -1,7 +1,7 @@
 <template>
   <div class="notes" v-el:notes>
     <note
-      v-for="note in notes"
+      v-for="note in filteredNotes"
       :note="note"
       v-on:click="selectNote(note)"
       >
@@ -18,7 +18,8 @@ export default {
   },
   data () {
     return {
-      notes: []
+      notes: [],
+      searchQuery: ''
     }
   },
   methods: {
@@ -28,16 +29,32 @@ export default {
       this.$dispatch('note.selected', {key, title, content})
     }
   },
+  computed: {
+    filteredNotes () {
+      return this.notes.filter((note) => {
+        if (this.searchQuery) return (note.title.indexOf(this.searchQuery) !== -1 || note.content.indexOf(this.searchQuery) !== -1)
+        return true
+      })
+    }
+  },
   watch: {
-    'notes': { // watch the notes array for changes
+    'filteredNotes': { // watch the notes array for changes
       handler () {
-        this.masonry.reloadItems()
-        this.masonry.layout()
+        this.$nextTick(() => {
+          this.masonry.reloadItems()
+          this.masonry.layout()
+        })
       },
       deep: true // we also want to watch changed inside individual notes
     }
   },
+  events: {
+    'search': function (searchQuery) {
+      this.searchQuery = searchQuery
+    }
+  },
   ready () {
+    noteRepository.detachFirebaseListeners()
     this.masonry = new Masonry(this.$els.notes, {
       itemSelector: '.note',
       columnWidth: 240,
@@ -56,6 +73,7 @@ export default {
       let note = noteRepository.find(this.notes, key) // get specific note from the notes in our VM by key
       this.notes.$remove(note) // remove note from notes array
     })
+    noteRepository.attachFirebaseListeners()
   }
 }
 </script>

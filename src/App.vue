@@ -1,28 +1,32 @@
 <template>
   <div>
-    <create-note-form></create-note-form>
-    <notes></notes>
-    <update-modal :note.sync="selectedNote"></update-modal>
+    <header-bar></header-bar>
+    <alerts :alerts="alerts"></alerts>
+    <router-view></router-view>
   </div>
 </template>
 <script>
-import Notes from './components/notes/Index'
-import CreateNoteForm from './components/notes/Create'
-import UpdateModal from './components/notes/UpdateModal'
+import Alerts from './components/Alerts'
+import HeaderBar from './components/Header'
 export default {
   components: {
-    Notes,
-    CreateNoteForm,
-    UpdateModal
+    Alerts,
+    HeaderBar
   },
   data () {
     return {
-      selectedNote: null
+      alerts: []
     }
   },
   events: {
-    'note.selected': function (note) {
-      this.selectedNote = note
+    'alert': function (alert) {
+      this.alerts.push(alert)
+      setTimeout(() => {
+        this.alerts.$remove(alert)
+      }, alert.duration || 1500)
+    },
+    'search': function (searchText) {
+      this.$broadcast('search', searchText) // send the event downwards to children
     }
   }
 }
@@ -36,14 +40,14 @@ export default {
 html{
   position: relative;
   min-height: 100%;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 body{
   background: #eee;
   min-height: 100%;
 }
 body > div{
-  padding: 16px 16px 50px;
+  padding: 50px 16px;
   min-height: 100vh;
   background: #eee;
   position: relative;
@@ -70,5 +74,10 @@ footer .fa-heart{
 footer iframe{
   position: relative;
   top: 4px;
+}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>

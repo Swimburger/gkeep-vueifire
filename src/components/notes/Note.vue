@@ -26,7 +26,7 @@ export default {
   methods: {
     remove () {
       noteRepository.remove(this.note, (err) => {
-        if (err) throw err // TODO: inform the user
+        if (err) return this.$dispatch('alert', {type: 'error', message: 'Failed to remove note'})
       })
     }
   }

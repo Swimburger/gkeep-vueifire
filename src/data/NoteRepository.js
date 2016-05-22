@@ -4,36 +4,41 @@ import EventEmitter from 'events'
 
 // extend EventEmitter so user of NoteRepository can react to our own defined events (ex: noteRepository.on('added'))
 class NoteRepository extends EventEmitter {
+  get uid () {
+    return this.ref.getAuth().uid
+  }
+  get notesRef () {
+    return this.ref.child(`users/${this.uid}/notes`)
+  }
   constructor () {
     super()
     // firebase reference to the notes
-    this.ref = new Firebase('https://gkeep-vueifire2.firebaseio.com/notes') // will have same result as new Firebase('https://resplendent-heat-896.firebaseio.com/').child('notes')
-    this.attachFirebaseListeners()
+    this.ref = new Firebase('https://gkeep-vueifire3.firebaseio.com') // will have same result as new Firebase('https://resplendent-heat-896.firebaseio.com/').child('notes')
   }
   // creates a note
   create ({title = '', content = ''}, onComplete) {
-    this.ref.push({title, content}, onComplete)
+    this.notesRef.push({title, content}, onComplete)
   }
   // updates a note
   update ({key, title = '', content = ''}, onComplete) {
-    this.ref.child(key).update({title, content}, onComplete) // key is used to find the child, a new note object is made without the key, to prevent key being inserted in Firebase
+    this.notesRef.child(key).update({title, content}, onComplete) // key is used to find the child, a new note object is made without the key, to prevent key being inserted in Firebase
     // new Firebase(`https://gkeep-vueifire2.firebaseio.com/notes/${key}`).update(...)
   }
   // removes a note
   remove ({key}, onComplete) {
-    this.ref.child(key).remove(onComplete)
+    this.notesRef.child(key).remove(onComplete)
   }
   // attach listeners to Firebase
   attachFirebaseListeners () {
-    this.ref.on('child_added', this.onAdded, this)
-    this.ref.on('child_removed', this.onRemoved, this)
-    this.ref.on('child_changed', this.onChanged, this)
+    this.notesRef.on('child_added', this.onAdded, this)
+    this.notesRef.on('child_removed', this.onRemoved, this)
+    this.notesRef.on('child_changed', this.onChanged, this)
   }
   // dettach listeners from Firebase
   detachFirebaseListeners () {
-    this.ref.off('child_added', this.onAdded, this)
-    this.ref.off('child_removed', this.onRemoved, this)
-    this.ref.off('child_changed', this.onChanged, this)
+    this.notesRef.off('child_added', this.onAdded, this)
+    this.notesRef.off('child_removed', this.onRemoved, this)
+    this.notesRef.off('child_changed', this.onChanged, this)
   }
   onAdded (snapshot) {
     // process data
