@@ -17,16 +17,24 @@ export default {
   props: ['note'],
   methods: {
     remove () {
-      noteRepository.remove(this.note, (err) => {
-        if (err) throw err // TODO: inform the user
-        this.dismissModal()
-      })
+      noteRepository.remove(this.note)
+        .then(() => {
+          this.dismissModal()
+          this.$dispatch('alert', {type: 'success', message: 'Note was successfully removed'})
+        })
+        .catch(() => {
+          this.$dispatch('alert', {type: 'error', message: 'Failed to remove note'})
+        })
     },
     update () {
-      noteRepository.update(this.note, (err) => {
-        if (err) throw err // TODO: inform the user
-        this.dismissModal()
-      })
+      noteRepository.update(this.note)
+        .then(() => {
+          this.dismissModal()
+          this.$dispatch('alert', {type: 'success', message: 'Note was successfully updated'})
+        })
+        .catch(() => {
+          this.$dispatch('alert', {type: 'error', message: 'Failed to update note'})
+        })
     },
     dismissModal () {
       this.note = null

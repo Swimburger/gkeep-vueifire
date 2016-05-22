@@ -14,7 +14,8 @@
     "babel-runtime": "^5.8.0",
     "firebase": "^2.4.2",
     "masonry-layout": "^4.0.0",
-    "vue": "^1.0.18"
+    "vue": "^1.0.18",
+    "vue-router": "^0.7.13"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

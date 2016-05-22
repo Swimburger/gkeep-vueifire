@@ -19,10 +19,12 @@ export default {
   methods: {
     createNote () {
       if (this.title.trim() || this.content.trim()) {
-        noteRepository.create({title: this.title, content: this.content}, (err) => {
-          if (err) throw err // TODO: inform the user
+        noteRepository.create({title: this.title, content: this.content}).then(() => {
           this.title = ''
           this.content = ''
+          this.$dispatch('alert', {type: 'success', message: 'Note was successfully created'})
+        }).catch(() => {
+          this.$dispatch('alert', {type: 'error', message: 'Failed to create note'})
         })
       }
     }

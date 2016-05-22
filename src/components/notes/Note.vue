@@ -8,6 +8,9 @@
     <button class="edit" type="button">
       <i class="fa fa-pencil" aria-hidden="true"></i>
     </button>
+    <div v-if="note.sharedWith">
+      <span v-for="(uid, userName) in note.sharedWith">{{userName}}</span>
+    </div>
   </div>
 </template>
 <script>
@@ -25,8 +28,8 @@ export default {
   },
   methods: {
     remove () {
-      noteRepository.remove(this.note, (err) => {
-        if (err) throw err // TODO: inform the user
+      noteRepository.remove(this.note).catch(() => {
+        this.$dispatch('alert', {type: 'error', message: 'Failed to remove note'})
       })
     }
   }
@@ -47,6 +50,7 @@ export default {
   width: 496px; /* medium = (col * 2) + gutter | 496px = (240px * 2) + 16px */
 }
 .note h1{
+  font-weight: 500;
   font-size: 1.1em;
   margin-bottom: 6px;
   word-wrap: break-word;

@@ -38,24 +38,28 @@ export default {
     }
   },
   ready () {
+    noteRepository.detachFirebaseListeners()
     this.masonry = new Masonry(this.$els.notes, {
       itemSelector: '.note',
       columnWidth: 240,
       gutter: 16,
       fitWidth: true
     })
-    noteRepository.on('added', (note) => {
-      this.notes.unshift(note) // add the note to the beginning of the array
+    noteRepository.on('value', (note) => {
+      let index = noteRepository.findIndex(this.notes, note.key)
+      if (index !== -1) {
+        this.$set(`notes[${index}].title`, note.title)
+        this.$set(`notes[${index}].content`, note.content)
+        this.$set(`notes[${index}].sharedWith`, note.sharedWith)
+      } else {
+        this.notes.unshift(note) // add the note to the beginning of the array
+      }
     })
-    noteRepository.on('changed', ({key, title, content}) => {
-      let note = noteRepository.find(this.notes, key) // get specific note from the notes in our VM by key
-      note.title = title
-      note.content = content
-    })
-    noteRepository.on('removed', ({key}) => {
+    noteRepository.on('removed', (key) => {
       let note = noteRepository.find(this.notes, key) // get specific note from the notes in our VM by key
       this.notes.$remove(note) // remove note from notes array
     })
+    noteRepository.attachFirebaseListeners()
   }
 }
 </script>
