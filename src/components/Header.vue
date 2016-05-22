@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     processUser (authed) {
+      if (authed === null) return
       switch (authed.provider) {
         case 'password':
           this.user = {
@@ -52,7 +53,7 @@ export default {
     authRepository.on('unauthed', () => {
       this.user = null
     })
-    this.user = authRepository.getAuth()
+    this.processUser(authRepository.getAuth())
     authRepository.attachFirebaseListeners()
   }
 }
