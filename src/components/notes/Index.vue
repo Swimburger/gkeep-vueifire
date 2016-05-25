@@ -54,7 +54,6 @@ export default {
     }
   },
   ready () {
-    noteRepository.detachFirebaseListeners()
     this.masonry = new Masonry(this.$els.notes, {
       itemSelector: '.note',
       columnWidth: 240,
