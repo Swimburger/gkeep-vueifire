@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import App from './App'
 import NotesPage from './components/pages/Notes'
 import AuthPage from './components/pages/Auth'
-import authRepository from './data/AuthRepository'
+import Auth from './data/Auth'
 
 Vue.use(VueRouter)
 
@@ -29,8 +29,8 @@ router.alias({
   '/': '/notes'
 })
 
-router.beforeEach(function (transition) {
-  if (transition.to.auth && !authRepository.getAuth()) {
+router.beforeEach((transition) => {
+  if (transition.to.auth && !Auth.getAuth()) {
     transition.redirect('/auth')
   } else {
     transition.next()

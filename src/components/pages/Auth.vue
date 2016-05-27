@@ -30,7 +30,7 @@
   </form>
 </template>
 <script>
-import authRepository from 'src/data/AuthRepository'
+import Auth from 'src/data/Auth'
 export default {
   data () {
     return {
@@ -43,7 +43,7 @@ export default {
   methods: {
     signUpWithPassword () {
       if (this.password === this.confirmPassword) {
-        authRepository.signUpWithPassword({
+        Auth.signUpWithPassword({
           email: this.email,
           password: this.password
         })
@@ -53,7 +53,7 @@ export default {
       }
     },
     signInWithPassword () {
-      return authRepository.signInWithPassword({
+      return Auth.signInWithPassword({
         email: this.email,
         password: this.password
       })
@@ -65,7 +65,7 @@ export default {
         .catch((error) => this.$dispatch('alert', {type: 'error', message: error.message})) // tell the user an error occurred
     },
     signInWithProvider (provider) {
-      authRepository.signInWithProvider(provider, (error, authData) => {
+      Auth.signInWithProvider(provider, (error, authData) => {
         if (error) this.$dispatch('alert', {type: 'error', message: error.message})
         this.onSignedIn()
       })

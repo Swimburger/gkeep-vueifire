@@ -1,34 +1,23 @@
 import Firebase from 'firebase'
-import EventEmitter from 'events'
 
-class AuthRepository extends EventEmitter {
-  constructor () {
-    super()
-    this.ref = new Firebase('https://gkeep-vueifire3.firebaseio.com/')
-  }
-  attachFirebaseListeners () {
-    this.ref.onAuth(this.onAuth, this)
-  }
-  detachFirebaseListeners () {
-    this.ref.offAuth(this.onAuth, this)
-  }
-  onAuth (authData) {
-    if (authData) {
-      this.emit('authed', authData)
-    } else {
-      this.emit('unauthed')
-    }
-  }
+export default {
+  ref: new Firebase('https://gkeep-vueifire3.firebaseio.com/'),
+  // calls callback when user signs in or out
+  onAuth (authCallback) {
+    this.ref.onAuth(authCallback)
+  },
+  // get's authenticated user
   getAuth () {
     return this.ref.getAuth()
-  }
+  },
   signInWithPassword (credentials) {
     return this.ref.authWithPassword(credentials)
-  }
+  },
   signUpWithPassword (credentials) {
     return this.ref.createUser(credentials) // this will create a Firebase user for authentication, this is separate from our own user objects
-  }
+  },
   signInWithProvider (provider, callback) {
+    // provider => 'google', 'facebook', 'github', ...
     this.ref.authWithOAuthPopup(provider, (error, authData) => {
       if (error) {
         if (error.code === 'TRANSPORT_UNAVAILABLE') {
@@ -42,9 +31,8 @@ class AuthRepository extends EventEmitter {
         if (callback) callback(null, authData)
       }
     })
-  }
+  },
   signOut () {
     this.ref.unauth()
   }
 }
-export default new AuthRepository() // this instance will be shared across imports

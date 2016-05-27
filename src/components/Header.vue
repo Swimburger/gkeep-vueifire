@@ -9,7 +9,7 @@
   </header>
 </template>
 <script>
-import authRepository from 'src/data/AuthRepository'
+import Auth from 'src/data/Auth'
 export default {
   data () {
     return {
@@ -24,7 +24,11 @@ export default {
   },
   methods: {
     processUser (authed) {
-      if (authed === null) return
+      console.log(authed)
+      if (authed === null) {
+        this.user = null
+        return
+      }
       switch (authed.provider) {
         case 'password':
           this.user = {
@@ -41,20 +45,13 @@ export default {
       }
     },
     signOut () {
-      authRepository.signOut()
+      Auth.signOut()
       this.$router.go('auth')
     }
   },
   ready () {
-    authRepository.detachFirebaseListeners()
-    authRepository.on('authed', () => {
-      this.processUser(authRepository.getAuth())
-    })
-    authRepository.on('unauthed', () => {
-      this.user = null
-    })
-    this.processUser(authRepository.getAuth())
-    authRepository.attachFirebaseListeners()
+    Auth.onAuth(this.processUser) // processUser everytime auth state changes (signs in or out)
+    this.processUser(Auth.getAuth()) // processUser in case user is already signed in
   }
 }
 </script>
