@@ -7,11 +7,11 @@
     </div>
     <div>
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" required v-model="password">
+      <input type="password" name="password" id="password" required v-model="password" placeholder="Password">
     </div>
     <div v-show="wantsToSignUp">
       <label for="confirm-password">Confirm Password</label>
-      <input type="password" name="confirm-password" id="confirm-password" v-model="confirmPassword">
+      <input type="password" name="confirm-password" id="confirm-password" v-model="confirmPassword" placeholder="Confirm Password">
     </div>
     <div v-show="!wantsToSignUp" class="clearfix btn-group">
       <button type="submit">Sign in</button>

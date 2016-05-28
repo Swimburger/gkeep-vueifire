@@ -4,7 +4,9 @@
     <div>
       <span>{{user.userTitle}}</span>
       <img :src="user.imageUrl" alt="{{user.userTitle}}"/>
-      <i class="fa fa-sign-out" aria-hidden="true" v-on:click="signOut"></i>
+      <a href="#" v-on:click.prevent="signOut">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+      </a>
     </div>
   </header>
 </template>
@@ -24,24 +26,13 @@ export default {
   },
   methods: {
     processUser (authed) {
-      console.log(authed)
       if (authed === null) {
         this.user = null
         return
       }
-      switch (authed.provider) {
-        case 'password':
-          this.user = {
-            userTitle: authed.password.email,
-            imageUrl: authed.password.profileImageURL
-          }
-          break
-        default:
-          this.user = {
-            userTitle: authed[authed.provider].displayName,
-            imageUrl: authed[authed.provider].profileImageURL
-          }
-          break
+      this.user = {
+        userTitle: authed[authed.provider].displayName || authed[authed.provider].email || '', // if there's no displayName, take the email, if there's no email, use an empty string
+        imageUrl: authed[authed.provider].profileImageURL
       }
     },
     signOut () {
@@ -91,14 +82,18 @@ header img {
   right: 60px;
   top: 8px;
 }
-header i.fa {
+header a {
   position: absolute;
   display: block;
   color: #fff;
   right: 15px;
-  top: 13px;
+  top: 10px;
   font-size: 25px;
   cursor: pointer;
+  transition: color .2s;
+}
+header a:focus, header a:hover {
+  color: #41b883;
 }
 @media screen and (max-width: 1200px) {
   header span{

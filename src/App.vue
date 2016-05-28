@@ -7,7 +7,7 @@
 </template>
 <script>
 import Alerts from './components/Alerts'
-import HeaderBar from './components/Header'
+import HeaderBar from './components/HeaderBar'
 export default {
   components: {
     Alerts,
