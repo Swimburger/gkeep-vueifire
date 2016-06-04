@@ -1,9 +1,8 @@
-<template>
-  <div>
-    <create-note-form></create-note-form>
-    <notes></notes>
-    <update-modal :note.sync="selectedNote"></update-modal>
-  </div>
+<template lang="pug">
+  div
+    create-note-form
+    notes
+    update-modal(v-bind:note.sync="selectedNote")
 </template>
 <script>
 import Notes from 'src/components/notes/Index'

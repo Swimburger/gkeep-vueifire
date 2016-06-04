@@ -1,12 +1,6 @@
-<template>
-  <div class="notes" v-el:notes>
-    <note
-      v-for="note in filteredNotes"
-      :note="note"
-      v-on:click="selectNote(note)"
-      >
-    </note>
-  </div>
+<template lang="pug">
+  div(class="notes" v-el:notes)
+    note(v-for="note in filteredNotes" v-bind:note="note" @click="selectNote(note)")
 </template>
 <script>
 import Masonry from 'masonry-layout'
@@ -76,8 +70,8 @@ export default {
   }
 }
 </script>
-<style>
-.notes{
-  margin: 0 auto;
-}
+<style lang="sass">
+.notes
+  margin: 0 auto
+
 </style>
