@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="alerts")
+  div.alerts
     div(v-for="alert in alerts" v-bind:class="alert.type" transition="expand")
       p {{alert.message}}
 </template>

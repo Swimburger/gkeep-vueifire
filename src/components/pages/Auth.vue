@@ -1,5 +1,5 @@
 <template lang="pug">
-  form(class="auth-form" @submit.prevent="wantsToSignUp ? signUpWithPassword() : signInWithPassword()")
+  form.auth-form(@submit.prevent="wantsToSignUp ? signUpWithPassword() : signInWithPassword()")
     h1 {{wantsToSignUp ? 'Sign up' : 'Sign in'}}
 
     div
@@ -23,15 +23,15 @@
 
     hr
 
-    div(class="social-providers")
+    div.social-providers
       a(href="#" @click.prevent="signInWithProvider('facebook')")
-        i(class="fa fa-facebook-square" aria-hidden="true")
+        i.fa.fa-facebook-square(aria-hidden="true")
       a(href="#" @click.prevent="signInWithProvider('twitter')")
-        i(class="fa fa-twitter-square" aria-hidden="true")
+        i.fa.fa-twitter-square(aria-hidden="true")
       a(href="#" @click.prevent="signInWithProvider('google')")
-        i(class="fa fa-google-plus-square" aria-hidden="true")
+        i.fa.fa-google-plus-square(aria-hidden="true")
       a(href="#" @click.prevent="signInWithProvider('github')")
-        i(class="fa fa-github-square" aria-hidden="true")
+        i.fa.fa-github-square(aria-hidden="true")
 </template>
 <script>
 import Auth from 'src/data/Auth'

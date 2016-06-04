@@ -1,11 +1,11 @@
 <template lang="pug">
-  div(class="note" v-bind:class="[size]")
+  div.note(v-bind:class="[size]")
     h1 {{note.title}}
     pre {{note.content}}
     button(type="button" @click.stop="remove")
-      i(class="fa fa-trash-o" aria-hidden="true")
-    button(class="edit" type="button")
-      i(class="fa fa-pencil" aria-hidden="true")
+      i.fa.fa-trash-o(aria-hidden="true")
+    button.edit(type="button")
+      i.fa.fa-pencil(aria-hidden="true")
 </template>
 <script>
 import noteRepository from '../../data/NoteRepository'

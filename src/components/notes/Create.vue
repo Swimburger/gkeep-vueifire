@@ -1,5 +1,5 @@
 <template lang="pug">
-  form(class="create-note" @submit.prevent="createNote")
+  form.create-note(@submit.prevent="createNote")
     input(name="title" v-model="title" placeholder="Title")
     textarea(name="content" v-model="content" placeholder="Text goes here..." rows="3")
     button(type="submit") +

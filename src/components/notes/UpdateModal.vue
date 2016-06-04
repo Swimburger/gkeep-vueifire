@@ -1,12 +1,12 @@
 <template lang="pug">
-  div(v-if="note" transition="modal" class="backdrop" @click="dismissModal")
-    form(class="edit-note" @submit.prevent="update" @click.stop="")
-      input(name="title" v-model="note.title" placeholder="Title")
+  div.backdrop(v-if="note" transition="modal" @click="dismissModal")
+    form.edit-note(@submit.prevent="update" @click.stop="")
+      input.title(v-model="note.title" placeholder="Title")
 
       textarea(name="content" v-model="note.content" placeholder="Text goes here..." rows="8")
 
       button(type="button" @click="remove")
-        i(class="fa fa-trash-o" aria-hidden="true")
+        i.fa.fa-trash-o(aria-hidden="true")
       button(type="submit") Done
 </template>
 <script>

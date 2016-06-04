@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="notes" v-el:notes)
+  div.notes(v-el:notes)
     note(v-for="note in filteredNotes" v-bind:note="note" @click="selectNote(note)")
 </template>
 <script>
@@ -73,5 +73,4 @@ export default {
 <style lang="sass">
 .notes
   margin: 0 auto
-
 </style>

@@ -8,7 +8,7 @@
       img(v-bind:src="user.imageUrl" alt="{{user.userTitle}}")
 
       a(href="#" @click.prevent="signOut")
-        i(class="fa fa-sign-out" aria-hidden="true")
+        i.fa.fa-sign-out(aria-hidden="true")
 </template>
 <script>
 import Auth from 'src/data/Auth'
