@@ -1,5 +1,4 @@
 # Google Keep Clone built with Vue and Firebase
-[![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/gkeep-vueifire)
 
 This project is a multi-part tutorial coming soon on Scotch.io on how to build a Google Keep clone built with Vue and Firebase.
 
